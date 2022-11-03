@@ -5,8 +5,8 @@ from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 # from db_models import View
 
-from db_models import db_session, CustomView
-from db_models import Anthroponym, AnthroponymImage, AnthroponymReference, Literature
+from .db_models import db_session
+from .db_models import Anthroponym, AnthroponymImage, AnthroponymReference, Literature
 
 app = Flask(__name__)
 

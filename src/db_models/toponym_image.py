@@ -1,7 +1,7 @@
 from sqlalchemy.schema import Column, ForeignKey
 from sqlalchemy.types import VARCHAR, BIGINT, NUMERIC, BLOB
 from sqlalchemy.orm import relationship
-from db_models.base_model import BaseModel
+from .base_model import BaseModel
 
 
 class ToponymImage(BaseModel):

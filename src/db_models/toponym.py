@@ -14,5 +14,5 @@ class Toponym(BaseModel):
     comments = Column(VARCHAR)
     century = Column(NUMERIC, nullable=False)
 
-    images = relationship("toponym_image")
-    references = relationship('toponym_reference')
+    images = relationship("ToponymImage")
+    references = relationship('ToponymReference')
