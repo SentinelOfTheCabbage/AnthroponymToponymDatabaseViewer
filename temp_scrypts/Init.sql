@@ -20,6 +20,7 @@ CREATE TABLE toponym (
 );
 
 CREATE TABLE anthroponym_image(
+    ai_id SERIAL PRIMARY KEY,
     anthroponym_id BIGINT UNSIGNED NOT NULL,
     img BLOB NOT NULL,
     CONSTRAINT fk_anthroponym_img
@@ -30,6 +31,7 @@ CREATE TABLE anthroponym_image(
 
 
 CREATE TABLE toponym_image(
+    ti_id SERIAL PRIMARY KEY,
     toponym_id BIGINT UNSIGNED NOT NULL,
     img BLOB NOT NULL,
     CONSTRAINT fk_toponym_img
@@ -39,6 +41,7 @@ CREATE TABLE toponym_image(
 );
 
 CREATE TABLE anthroponym_reference (
+    ar_id SERIAL PRIMARY KEY,
     anthroponym_id BIGINT UNSIGNED NOT NULL,
     literature_id BIGINT UNSIGNED NOT NULL,
     pages JSON NOT NULL,
@@ -53,6 +56,7 @@ CREATE TABLE anthroponym_reference (
 );
 
 CREATE TABLE toponym_reference (
+    tr_id SERIAL PRIMARY KEY,
     toponym_id BIGINT UNSIGNED NOT NULL,
     literature_id BIGINT UNSIGNED NOT NULL,
     pages JSON NOT NULL,
