@@ -6,5 +6,9 @@ from .base_model import BaseModel
 
 class ToponymImage(BaseModel):
     __tablename__ = 'toponym_image'
-    anthroponym_id = Column(BIGINT, ForeignKey('toponym.toponym_id'))
+    toponym_id = Column(BIGINT, ForeignKey('toponym.toponym_id'))
     img = Column(BLOB)
+
+    __mapper_args__ = {
+        "primary_key": [toponym_id, img]
+    }

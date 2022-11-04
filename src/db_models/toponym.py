@@ -1,7 +1,7 @@
 from sqlalchemy.schema import Column
 from sqlalchemy.types import VARCHAR, BIGINT, NUMERIC
 from sqlalchemy.orm import relationship
-from db_models.base_model import BaseModel
+from .base_model import BaseModel
 
 
 class Toponym(BaseModel):
@@ -14,5 +14,5 @@ class Toponym(BaseModel):
     comments = Column(VARCHAR)
     century = Column(NUMERIC, nullable=False)
 
-    images = relationship("ToponymImage")
-    references = relationship('ToponymReference')
+    images = relationship("ToponymImage", backref='Toponym')
+    references = relationship('ToponymReference', backref='Toponym')

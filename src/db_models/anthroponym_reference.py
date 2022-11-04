@@ -9,3 +9,7 @@ class AnthroponymReference(BaseModel):
     literature_id = Column(BIGINT, ForeignKey('literature.literature_id'), nullable=False, primary_key=False)
     anthroponym_id = Column(BIGINT, ForeignKey('anthroponym.anthroponym_id'), nullable=False, primary_key=False)
     pages = Column(JSON, nullable=False)
+
+    __mapper_args__ = {
+        "primary_key": [literature_id, anthroponym_id]
+    }

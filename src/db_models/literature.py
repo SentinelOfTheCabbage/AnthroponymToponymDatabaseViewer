@@ -12,4 +12,4 @@ class Literature(BaseModel):
     published_at = Column(SMALLINT, nullable=False, unique=True)
 
     anthroponyms = relationship('AnthroponymReference', backref='Literature')
-    # toponyms = relationship('ToponymReference', backref='Literature')
+    toponyms = relationship('ToponymReference', backref='Literature')
