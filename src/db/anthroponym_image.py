@@ -13,6 +13,6 @@ class AnthroponymImage(db.Model):
     }
 
 
-class AnthroponymImageView(ModelView):
+class AnthroponymImageModelView(ModelView):
     # TODO: make file uploading page!
     create_template = 'create_anthroponym_image.html'
