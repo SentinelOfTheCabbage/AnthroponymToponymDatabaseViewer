@@ -1,7 +1,6 @@
 import os
-from flask import Flask, render_template
+from flask import render_template
 from flask_admin import Admin
-from flask_admin.contrib.sqla import ModelView
 from flask_migrate import Migrate
 
 from src.configs.constants import *

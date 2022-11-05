@@ -1,6 +1,5 @@
 from flask_admin.contrib.sqla import ModelView
 from sqlalchemy.types import BIGINT, BLOB
-from sqlalchemy.orm import relationship
 from .connection import db
 
 

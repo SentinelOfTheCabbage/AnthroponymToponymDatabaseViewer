@@ -1,4 +1,3 @@
-from sqlalchemy.schema import Column
 from sqlalchemy.types import BIGINT, JSON
 from .connection import db
 
