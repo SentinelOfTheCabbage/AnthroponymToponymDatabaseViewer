@@ -12,22 +12,15 @@ migrate = Migrate(app, db)
 
 admin = Admin(app, name='Admin panel', template_mode='bootstrap4')
 
-admin.add_view(
-    ModelView(Anthroponym, db.session, category=Cat.ANTHROPONYM, name=AnthTables.ANTHROPONYM))
-admin.add_view(
-    AnthroponymImageModelView(AnthroponymImage, db.session, category=Cat.ANTHROPONYM, name=AnthTables.IMAGE))
-admin.add_view(
-    AnthroponymReferenceModelView(AnthroponymReference, db.session, category=Cat.ANTHROPONYM, name=AnthTables.REFERENCE))
+admin.add_view(AnthroponymView)
+admin.add_view(AnthroponymImageView)
+admin.add_view(AnthroponymReferenceView)
 
-admin.add_view(
-    ModelView(Toponym, db.session, category=Cat.TOPONYM, name=ToponTables.TOPONYM))
-admin.add_view(
-    ToponymImageModelView(ToponymImage, db.session, category=Cat.TOPONYM, name=ToponTables.IMAGE))
-admin.add_view(
-    ModelView(ToponymReference, db.session, category=Cat.TOPONYM, name=ToponTables.REFERENCE))
+admin.add_view(ToponymView)
+admin.add_view(ToponymImageView)
+admin.add_view(ToponymReferenceView)
 
-admin.add_view(
-    ModelView(Literature, db.session, category=Cat.OTHER, name='Литература'))
+admin.add_view(LiteratureView)
 
 
 @app.route('/')
@@ -36,5 +29,4 @@ def main_page():
 
 
 if __name__ == '__main__':
-    app.secret_key = 'debug'
     app.run(debug=True)

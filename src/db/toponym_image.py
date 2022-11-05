@@ -1,5 +1,4 @@
 from flask_admin.contrib.sqla import ModelView
-from sqlalchemy.schema import Column, ForeignKey
 from sqlalchemy.types import BIGINT, BLOB
 from sqlalchemy.orm import relationship
 from .connection import db
@@ -7,7 +6,7 @@ from .connection import db
 
 class ToponymImage(db.Model):
     __tablename__ = 'toponym_image'
-    toponym_id = db.Column(BIGINT, ForeignKey('toponym.toponym_id'))
+    toponym_id = db.Column(BIGINT, db.ForeignKey('toponym.toponym_id'))
     img = db.Column(BLOB)
 
     __mapper_args__ = {

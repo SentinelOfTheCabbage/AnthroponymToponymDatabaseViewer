@@ -1,13 +1,12 @@
 from flask_admin.contrib.sqla import ModelView
-from sqlalchemy.schema import Column, ForeignKey
 from sqlalchemy.types import BIGINT, JSON
 from .connection import db
 
 
 class AnthroponymReference(db.Model):
     __tablename__ = 'anthroponym_reference'
-    literature_id = db.Column(BIGINT, ForeignKey('literature.literature_id'), nullable=False, primary_key=False)
-    anthroponym_id = db.Column(BIGINT, ForeignKey('anthroponym.anthroponym_id'), nullable=False, primary_key=False)
+    literature_id = db.Column(BIGINT, db.ForeignKey('literature.literature_id'), nullable=False, primary_key=False)
+    anthroponym_id = db.Column(BIGINT, db.ForeignKey('anthroponym.anthroponym_id'), nullable=False, primary_key=False)
     # TODO : make pages String, not JSON. Like '1, 15-22'
     pages = db.Column(JSON, nullable=False)
 
