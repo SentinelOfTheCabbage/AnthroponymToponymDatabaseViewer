@@ -38,6 +38,13 @@ CREATE TABLE toponym_image(
 	    ON DELETE CASCADE
 );
 
+CREATE TABLE literature (
+    literature_id SERIAL PRIMARY KEY,
+    author VARCHAR(512) NOT NULL UNIQUE,
+    title VARCHAR(256) NOT NULL UNIQUE,
+    published_at SMALLINT NOT NULL UNIQUE
+);
+
 CREATE TABLE anthroponym_reference (
     anthroponym_id BIGINT UNSIGNED NOT NULL,
     literature_id BIGINT UNSIGNED NOT NULL,
@@ -64,11 +71,4 @@ CREATE TABLE toponym_reference (
         FOREIGN KEY(literature_id) 
 	    REFERENCES literature(literature_id)
 	    ON DELETE CASCADE
-);
-
-CREATE TABLE literature (
-    literature_id SERIAL PRIMARY KEY,
-    author VARCHAR(512) NOT NULL UNIQUE,
-    title VARCHAR(256) NOT NULL UNIQUE,
-    published_at SMALLINT NOT NULL UNIQUE
 );
