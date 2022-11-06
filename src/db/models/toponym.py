@@ -1,6 +1,6 @@
 from sqlalchemy.types import VARCHAR, BIGINT, NUMERIC
 from sqlalchemy.orm import relationship
-from .connection import db
+from ..connection import db
 
 
 class Toponym(db.Model):

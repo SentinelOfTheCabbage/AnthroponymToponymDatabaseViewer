@@ -1,6 +1,6 @@
 from sqlalchemy.types import VARCHAR, BIGINT, SMALLINT
 from sqlalchemy.orm import relationship
-from .connection import db
+from ..connection import db
 
 
 class Literature(db.Model):

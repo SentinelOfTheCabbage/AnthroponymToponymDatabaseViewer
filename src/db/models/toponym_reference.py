@@ -1,5 +1,5 @@
 from sqlalchemy.types import BIGINT, VARCHAR
-from .connection import db
+from ..connection import db
 
 
 class ToponymReference(db.Model):

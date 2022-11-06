@@ -1,6 +1,6 @@
 from flask_admin.contrib.sqla import ModelView
 from sqlalchemy.types import BIGINT, VARCHAR
-from .connection import db
+from ..connection import db
 
 
 class AnthroponymReference(db.Model):
