@@ -2,6 +2,7 @@ import os
 from flask import render_template
 from flask_admin import Admin
 from flask_migrate import Migrate
+from flask_security import Security, SQLAlchemyUserDatastore
 
 from src.configs.constants import *
 from src.db import *
@@ -20,6 +21,12 @@ admin.add_view(ToponymImageView)
 admin.add_view(ToponymReferenceView)
 
 admin.add_view(LiteratureView)
+
+### Flask-Security ###
+user_datastore = SQLAlchemyUserDatastore(db, User, Role)
+security = Security(app, user_datastore)
+# with app.app_context() as context:
+#     user_datastore.create_user(email='admin@admin.ru', password='admin')
 
 
 @app.route('/')

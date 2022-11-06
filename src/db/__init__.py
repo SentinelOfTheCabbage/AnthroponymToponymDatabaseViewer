@@ -8,6 +8,7 @@ from .models.literature import Literature
 from .models.toponym import Toponym
 from .models.toponym_image import ToponymImage, ToponymImageModelView
 from .models.toponym_reference import ToponymReference
+from .models.roles import Role, User, roles_users
 from .connection import db
 
 AnthroponymView = ModelView(Anthroponym, db.session, category=Cat.ANTHROPONYM, name=AnthTables.ANTHROPONYM)
