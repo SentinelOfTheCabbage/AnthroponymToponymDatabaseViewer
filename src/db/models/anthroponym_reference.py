@@ -1,5 +1,6 @@
-from flask_admin.contrib.sqla import ModelView
 from sqlalchemy.types import BIGINT, VARCHAR
+
+from ..secured_view import SecuredModelView
 from ..connection import db
 
 
@@ -13,5 +14,5 @@ class AnthroponymReference(db.Model):
         "primary_key": [literature_id, anthroponym_id]
     }
 
-class AnthroponymReferenceModelView(ModelView):
+class AnthroponymReferenceModelView(SecuredModelView):
     column_list = ['Literature', 'Anthroponym', 'pages']

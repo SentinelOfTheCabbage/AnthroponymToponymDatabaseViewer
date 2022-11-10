@@ -1,5 +1,6 @@
-from flask_admin.contrib.sqla import ModelView
 from sqlalchemy.types import BIGINT, BLOB
+
+from ..secured_view import SecuredModelView
 from ..connection import db
 
 
@@ -13,6 +14,6 @@ class AnthroponymImage(db.Model):
     }
 
 
-class AnthroponymImageModelView(ModelView):
+class AnthroponymImageModelView(SecuredModelView):
     # TODO: make file uploading page!
     create_template = 'create_anthroponym_image.html'

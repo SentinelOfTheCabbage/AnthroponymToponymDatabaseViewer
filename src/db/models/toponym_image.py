@@ -1,5 +1,6 @@
-from flask_admin.contrib.sqla import ModelView
 from sqlalchemy.types import BIGINT, BLOB
+
+from ..secured_view import SecuredModelView
 from ..connection import db
 
 
@@ -12,6 +13,6 @@ class ToponymImage(db.Model):
         "primary_key": [toponym_id, img]
     }
 
-class ToponymImageModelView(ModelView):
+class ToponymImageModelView(SecuredModelView):
     edit_template = 'edit_toponym_image.html'
     create_template = 'create_toponym_image.html'
