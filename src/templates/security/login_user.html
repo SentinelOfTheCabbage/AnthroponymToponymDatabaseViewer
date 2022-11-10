@@ -5,7 +5,7 @@
   <div class="login">
     <div class="login-screen">
       <div class="app-title">
-        <h1>Login</h1>
+        <h1>Login page</h1>
       </div>
       {{ login_user_form.hidden_tag() }}
       <div class="login-form">
@@ -18,7 +18,7 @@
         <!-- {{ render_field_with_errors(login_user_form.remember) }} -->
         <!-- {{ render_field(login_user_form.next) }} -->
         {{ render_field(login_user_form.submit, class="btn btn-primary btn-large btn-block") }}
-
+        <div class="control-group goto-main"><a href="/">Вернуться на сайт</a></div>
       </div>
     </div>
   </div>
