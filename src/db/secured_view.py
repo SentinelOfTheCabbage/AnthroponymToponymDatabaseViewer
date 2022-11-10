@@ -24,7 +24,7 @@ class AdminMixin():
 
     def _handle_view(self, name, **kwargs):
         if not self.is_accessible():
-            return redirect(url_for('admin'))
+            return redirect(url_for('admin.index'))
 
 
 class AdminModelView(AdminMixin, ModelView):

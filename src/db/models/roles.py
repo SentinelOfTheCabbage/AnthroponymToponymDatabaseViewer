@@ -1,7 +1,7 @@
 from flask_security import UserMixin, RoleMixin
 from sqlalchemy.types import BIGINT, VARCHAR, INTEGER, BOOLEAN
 
-from ..secured_view import SecuredModelView
+from ..secured_view import AdminModelView
 from ..connection import db
 
 # Flask-Security
@@ -37,5 +37,5 @@ class Role(db.Model, RoleMixin):
         return f'{self.id}: {self.name}'
 
 
-class UserModelView(SecuredModelView):
+class UserModelView(AdminModelView):
     column_list = ['email', 'password', 'roles', 'active']

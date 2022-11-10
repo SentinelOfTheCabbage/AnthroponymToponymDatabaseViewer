@@ -2,7 +2,9 @@
     <script>window.location.replace("{{ url_for('security.login') }}");</script>
 {% endif %}
 {% extends 'admin/base.html' %}
-
+{% block brand %}
+    <a class="navbar-brand" href="/">{{ admin_view.admin.name }}</a>
+{% endblock %}
 {% block menu_links %}
     <b> {{ current_user.email }}</b>
 {% endblock %}
