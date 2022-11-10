@@ -11,3 +11,4 @@ app.config['SECURITY_PASSWORD_SALT'] = 'HELLO WORLD'
 app.config['SECURITY_PASSWORD_HASH'] = 'bcrypt'
 app.config['SECURITY_POST_LOGIN_VIEW'] = '/admin'
 app.config['SECURITY_POST_LOGOUT_VIEW'] = '/login'
+app.config['SECURITY_FLASH_MESSAGES'] = False
