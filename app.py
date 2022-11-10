@@ -21,10 +21,20 @@ admin.add_view(ToponymReferenceView)
 
 admin.add_view(LiteratureView)
 
-### Flask-Security ###
+admin.add_view(UsersView)
+admin.add_view(RolesView)
+# admin.add_view(UserRoles)
+
+### Flask-Security init code ###
 # @app.before_first_request
 # def create_user():
-#     user_datastore.create_user(email='admin@mypage.ru', password='password')
+#     user_datastore.create_role(name='moderator', description='Can watch only part of tables. Can\' edit them')
+#     moderator_role = user_datastore.find_role('moderator')
+#     user_datastore.create_user(email='moderator', password='password', roles=[moderator_role])
+#     db.session.commit()
+#     user_datastore.create_role(name='admin', description='Can add other users. Can see and edit any table')
+#     admin_role = user_datastore.find_role('admin')
+#     user_datastore.create_user(email='admin', password='password', roles=[admin_role])
 #     db.session.commit()
 
 @app.route('/')

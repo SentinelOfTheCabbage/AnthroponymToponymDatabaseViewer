@@ -10,6 +10,7 @@ class Cat(MetaEnum):
     ANTHROPONYM = 'Антропонимы'
     TOPONYM = 'Топоним'
     OTHER = 'Остальное'
+    USERS = 'Аккаунты'
 
 
 class AnthTables(MetaEnum):
@@ -22,3 +23,9 @@ class ToponTables(MetaEnum):
     TOPONYM = 'Топонимы'
     IMAGE = 'Изображения'
     REFERENCE = 'Референсы'
+
+
+class UsersNRoles(MetaEnum):
+    USER = 'Пользователи'
+    ROLE = 'Роли'
+    USERSROLE = 'Роли пользователей'
