@@ -1,4 +1,6 @@
 from sqlalchemy.types import BIGINT, VARCHAR
+
+from ..secured_view import SecuredModelView
 from ..connection import db
 
 
@@ -11,3 +13,6 @@ class ToponymReference(db.Model):
     __mapper_args__ = {
         "primary_key": [literature_id, toponym_id]
     }
+
+class ToponymReferenceModelView(SecuredModelView):
+    column_list = ['Toponym', 'Literature', 'pages']

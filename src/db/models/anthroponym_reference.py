@@ -15,4 +15,4 @@ class AnthroponymReference(db.Model):
     }
 
 class AnthroponymReferenceModelView(SecuredModelView):
-    column_list = ['Literature', 'Anthroponym', 'pages']
+    column_list = ['Anthroponym', 'Literature', 'pages']
