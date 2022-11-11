@@ -48,7 +48,7 @@ CREATE TABLE literature (
 CREATE TABLE anthroponym_reference (
     anthroponym_id BIGINT UNSIGNED NOT NULL,
     literature_id BIGINT UNSIGNED NOT NULL,
-    pages JSON NOT NULL,
+    pages VARCHAR(100) NOT NULL,
     CONSTRAINT fk_anthroponym_ref
         FOREIGN KEY(anthroponym_id) 
 	    REFERENCES anthroponym(anthroponym_id)
@@ -62,7 +62,7 @@ CREATE TABLE anthroponym_reference (
 CREATE TABLE toponym_reference (
     toponym_id BIGINT UNSIGNED NOT NULL,
     literature_id BIGINT UNSIGNED NOT NULL,
-    pages JSON NOT NULL,
+    pages VARCHAR(100) NOT NULL,
     CONSTRAINT fk_toponym_ref
         FOREIGN KEY(toponym_id) 
 	    REFERENCES toponym(toponym_id)
