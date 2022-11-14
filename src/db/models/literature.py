@@ -1,5 +1,7 @@
 from sqlalchemy.types import VARCHAR, BIGINT, SMALLINT
 from sqlalchemy.orm import relationship
+
+from ..secured_view import SecuredModelView
 from ..connection import db
 
 
@@ -14,4 +16,8 @@ class Literature(db.Model):
     toponyms = relationship('ToponymReference', backref='Literature')
 
     def __repr__(self):
-        return f'Литература: {self.author} - {self.title}'
+        return f'<Литература: {self.author} - `{self.title}`>'
+
+
+class LiteratureModelView(SecuredModelView):
+    column_searchable_list = ['author', 'title']

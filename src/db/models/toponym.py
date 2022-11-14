@@ -1,5 +1,7 @@
 from sqlalchemy.types import VARCHAR, BIGINT, NUMERIC
 from sqlalchemy.orm import relationship
+
+from ..secured_view import SecuredModelView
 from ..connection import db
 
 
@@ -15,3 +17,6 @@ class Toponym(db.Model):
 
     images = relationship("ToponymImage", backref='Toponym')
     references = relationship('ToponymReference', backref='Toponym')
+
+class ToponymModelView(SecuredModelView):
+    column_searchable_list = ['toponym', 'original', 'transcription', 'source', 'century']

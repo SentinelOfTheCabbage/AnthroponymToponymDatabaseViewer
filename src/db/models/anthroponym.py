@@ -1,5 +1,7 @@
 from sqlalchemy.types import VARCHAR, BIGINT, NUMERIC
 from sqlalchemy.orm import relationship
+
+from ..secured_view import SecuredModelView
 from ..connection import db
 
 
@@ -12,9 +14,12 @@ class Anthroponym(db.Model):
     source = db.Column(VARCHAR(512), unique=True, nullable=False)
     comments = db.Column(VARCHAR(512))
     century = db.Column(NUMERIC, nullable=False)
-    # TODO: hide relationships!
+    
     images = relationship("AnthroponymImage", backref='Anthroponym')
     references = relationship('AnthroponymReference', backref='Anthroponym')
 
     def __repr__(self):
-        return f'Антропоним: {self.anthroponym} - {self.original} - {self.transcription}'
+        return f'<Антропоним: {self.anthroponym} - {self.original} - {self.transcription}>'
+
+class AnthroponymModelView(SecuredModelView):
+    column_searchable_list = ['anthroponym', 'original', 'transcription', 'source', 'century']
