@@ -1,7 +1,7 @@
 from sqlalchemy.types import BIGINT, VARCHAR
 
-from ..secured_view import SecuredModelView
 from ..connection import db
+from ..secured_view import SecuredModelView
 
 
 class AnthroponymReference(db.Model):
@@ -13,6 +13,10 @@ class AnthroponymReference(db.Model):
     __mapper_args__ = {
         "primary_key": [literature_id, anthroponym_id]
     }
+
+    def __repr__(self):
+        return f'{self.Literature} <=> {self.Anthroponym}'
+
 
 class AnthroponymReferenceModelView(SecuredModelView):
     column_list = ['Anthroponym', 'Literature', 'pages']

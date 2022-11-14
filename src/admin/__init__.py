@@ -6,4 +6,3 @@ from ..db.connection import db
 
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 security = Security()
-
