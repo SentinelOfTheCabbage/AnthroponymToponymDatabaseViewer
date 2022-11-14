@@ -10,7 +10,7 @@ db.init_app(app)
 migrate = Migrate(app, db)
 security.init_app(app, user_datastore)
 
-admin = Admin(app, name='Антропонимус', template_mode='bootstrap4')
+admin = Admin(app, name='Антропонимус', template_mode='bootstrap4', url='/')
 admin.add_view(AnthroponymView)
 admin.add_view(AnthroponymImageView)
 admin.add_view(AnthroponymReferenceView)
