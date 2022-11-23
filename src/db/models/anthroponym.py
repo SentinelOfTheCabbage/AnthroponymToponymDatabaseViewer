@@ -17,9 +17,14 @@ class Anthroponym(db.Model):
     
     images = relationship("AnthroponymImage", backref='Anthroponym')
     references = relationship('AnthroponymReference', backref='Anthroponym')
+    
+    @property
+    def literatures(self):
+        return '\n'.join([str(ref.Literature) for ref in self.references])
 
     def __repr__(self):
         return f'<Антропоним: {self.anthroponym} - {self.original} - {self.transcription}>'
 
 class AnthroponymModelView(SecuredModelView):
     column_searchable_list = ['anthroponym', 'original', 'transcription', 'source', 'century']
+    column_list = ['anthroponym', 'original', 'transcription', 'source', 'comments', 'century', 'literatures']

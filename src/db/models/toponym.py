@@ -18,5 +18,11 @@ class Toponym(db.Model):
     images = relationship("ToponymImage", backref='Toponym')
     references = relationship('ToponymReference', backref='Toponym')
 
+    @property
+    def literatures(self):
+        return '\n'.join([str(ref.Literature) for ref in self.references])
+
+
 class ToponymModelView(SecuredModelView):
     column_searchable_list = ['toponym', 'original', 'transcription', 'source', 'century']
+    column_list = ['toponym', 'original', 'transcription', 'source', 'comments', 'century', 'literatures']
