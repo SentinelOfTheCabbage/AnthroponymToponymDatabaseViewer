@@ -16,8 +16,10 @@ class Literature(db.Model):
     toponyms = relationship('ToponymReference', backref='Literature')
 
     def __repr__(self):
-        return f'<Литература: {self.author} - `{self.title}`>'
+        return f'{self.author} - `{self.title}`'
 
+    def __str__(self):
+        return self.__repr__()
 
 class LiteratureModelView(SecuredModelView):
     column_searchable_list = ['author', 'title']

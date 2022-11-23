@@ -34,7 +34,7 @@ class Role(db.Model, RoleMixin):
     description = db.Column(VARCHAR(511))
 
     def __repr__(self) -> str:
-        return f'<Role: {self.name.title()}>'
+        return f'Роль - {self.name.title()}'
 
 
 class UserModelView(AdminModelView):

@@ -23,7 +23,7 @@ class Anthroponym(db.Model):
         return '\n'.join([str(ref.Literature) for ref in self.references])
 
     def __repr__(self):
-        return f'<Антропоним: {self.anthroponym} - {self.original} - {self.transcription}>'
+        return f'{self.transcription} - {self.original}'
 
 class AnthroponymModelView(SecuredModelView):
     column_searchable_list = ['anthroponym', 'original', 'transcription', 'source', 'century']

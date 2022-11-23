@@ -22,6 +22,11 @@ class Toponym(db.Model):
     def literatures(self):
         return '\n'.join([str(ref.Literature) for ref in self.references])
 
+    def __repr__(self):
+        return f'{self.transcription} - {self.original}'
+
+    def __str__(self):
+        return self.__repr__()
 
 class ToponymModelView(SecuredModelView):
     column_searchable_list = ['toponym', 'original', 'transcription', 'source', 'century']
