@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: c83b3a5cd26a
+Revision ID: c091220db900
 Revises: 
-Create Date: 2022-11-11 06:06:30.354718
+Create Date: 2022-11-14 12:51:32.392758
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'c83b3a5cd26a'
+revision = 'c091220db900'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -74,7 +74,7 @@ def upgrade():
     )
     op.create_table('anthroponym_image',
     sa.Column('anthroponym_id', sa.BIGINT(), nullable=True),
-    sa.Column('img', sa.BLOB(), nullable=True),
+    sa.Column('img', sa.VARCHAR(length=50), nullable=False),
     sa.ForeignKeyConstraint(['anthroponym_id'], ['anthroponym.anthroponym_id'], )
     )
     op.create_table('anthroponym_reference',
@@ -92,7 +92,7 @@ def upgrade():
     )
     op.create_table('toponym_image',
     sa.Column('toponym_id', sa.BIGINT(), nullable=True),
-    sa.Column('img', sa.BLOB(), nullable=True),
+    sa.Column('img', sa.VARCHAR(length=50), nullable=False),
     sa.ForeignKeyConstraint(['toponym_id'], ['toponym.toponym_id'], )
     )
     op.create_table('toponym_reference',

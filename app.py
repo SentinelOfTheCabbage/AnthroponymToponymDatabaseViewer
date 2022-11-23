@@ -7,7 +7,7 @@ from src.db import *
 from src import app, db, security, user_datastore
 
 db.init_app(app)
-migrate = Migrate(app, db)
+migrate = Migrate(app, db, compare_type=True)
 security.init_app(app, user_datastore)
 
 admin = Admin(app, name='Антропонимус', template_mode='bootstrap4', url='/')
