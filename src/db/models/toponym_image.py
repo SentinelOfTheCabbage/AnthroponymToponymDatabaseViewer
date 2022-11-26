@@ -21,7 +21,7 @@ class ToponymImage(db.Model):
 class ToponymImageModelView(SecuredModelView):
     column_list = ['Anthroponym', 'img']
 
-    def _list_thumbnail(view, context, model, name):
+    def _img_displayer(view, context, model, name):
         if not model.img:
             return ''
         return markupsafe.Markup(
@@ -32,7 +32,7 @@ class ToponymImageModelView(SecuredModelView):
         return "TODO"
 
     column_formatters = {
-        'img': _list_thumbnail
+        'img': _img_displayer
     }
     form_widget_args = {
         'img': {
