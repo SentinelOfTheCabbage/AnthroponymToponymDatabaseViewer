@@ -1,5 +1,6 @@
 from sqlalchemy.types import VARCHAR, BIGINT, NUMERIC
 from sqlalchemy.orm import relationship
+from sqlalchemy import CheckConstraint
 from jinja2.utils import markupsafe
 
 from ..secured_view import SecuredModelView
@@ -12,13 +13,19 @@ class Toponym(db.Model):
     toponym = db.Column(VARCHAR(512), unique=True)
     original = db.Column(VARCHAR(512), unique=True, nullable=False)
     transcription = db.Column(VARCHAR(512), unique=True, nullable=False)
-    source = db.Column(VARCHAR(512), unique=True, nullable=False)
+    historical_source = db.Column(VARCHAR(512), nullable=True)
+    ageographical_source = db.Column(VARCHAR(512), nullable=True)
     comments = db.Column(VARCHAR(512))
     century = db.Column(NUMERIC, nullable=False)
     geopos = db.Column(VARCHAR(32), unique=False, nullable=False)
 
     images = relationship("ToponymImage", backref='Toponym')
     references = relationship('ToponymReference', backref='Toponym')
+
+    CheckConstraint(
+        sqltext='historical_source IS NOT NULL or ageographical_source IS NOT NULL',
+        name='is_source_exists'
+    )
 
     @property
     def literatures(self):
@@ -32,19 +39,34 @@ class Toponym(db.Model):
 
 
 class ToponymModelView(SecuredModelView):
-    column_searchable_list = ['toponym', 'original', 'transcription', 'source', 'century']
-    column_list = ['toponym', 'original', 'transcription',
-                   'source', 'comments', 'century', 'geopos', 'literatures']
+    column_searchable_list = ['toponym', 'original', 'transcription',
+                              'historical_source', 'ageographical_source', 'century']
+    column_list = ['toponym', 'original', 'transcription', 'historical_source',
+                   'ageographical_source', 'comments', 'century', 'geopos', 'literatures']
+
 
     def geo_pos_formatter(view, context, model, name):
         if not model.geopos:
             return ''
         return markupsafe.Markup(
-            '<a href="https://www.google.ru/maps/@{},{},13z">Show on google maps</a>'.format(
-                *model.geopos.split(',')
+            '<a href="https://www.google.ru/maps/@{},13z">Show on google maps</a>'.format(
+                model.geopos
             )
         )
 
+    def _hist_source(view, context, model, name):
+        if not model.historical_source:
+            return ''
+        return markupsafe.Markup(f'<i>{model.historical_source}</i>')
+
+
+    def _ageograph_source(view, context, model, name):
+        if not model.ageographical_source:
+            return ''
+        return markupsafe.Markup(f'<b>{model.ageographical_source}</b>')
+
     column_formatters = {
-        'geopos': geo_pos_formatter
+        'geopos': geo_pos_formatter,
+        'ageographical_source': _ageograph_source,
+        'historical_source': _hist_source,
     }
