@@ -57,13 +57,13 @@ class ToponymModelView(SecuredModelView):
     def _hist_source(view, context, model, name):
         if not model.historical_source:
             return ''
-        return markupsafe.Markup(f'<i>{model.historical_source}</i>')
+        return markupsafe.Markup(f'<b>{model.historical_source}</b>')
 
 
     def _ageograph_source(view, context, model, name):
         if not model.ageographical_source:
             return ''
-        return markupsafe.Markup(f'<b>{model.ageographical_source}</b>')
+        return markupsafe.Markup(f'<i>{model.ageographical_source}</i>')
 
     column_formatters = {
         'geopos': geo_pos_formatter,
