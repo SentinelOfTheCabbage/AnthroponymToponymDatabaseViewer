@@ -18,17 +18,17 @@ class ToponymImage(db.Model):
         "primary_key": [toponym_id, img]
     }
 
+
 class ToponymImageModelView(SecuredModelView):
-    column_list = ['Anthroponym', 'img']
+    column_list = ['Toponym', 'img']
 
     def _img_displayer(view, context, model, name):
         if not model.img:
             return ''
         return markupsafe.Markup(
-            '<img src="%s">' %
+            '<img src="%s" style="min-width:150px; min-height:150px; max-width:300px; max-height:300px;">' %
             url_for('static', filename=model.img)
         )
-        # TODO: is url_for works with images?
         return "TODO"
 
     column_formatters = {
@@ -40,10 +40,8 @@ class ToponymImageModelView(SecuredModelView):
         },
     }
     form_extra_fields = {
-        'img_file': form.FileUploadField('Image file', allowed_extensions=['jpg', 'png', 'jpeg', 'svg', 'gif'], base_path='C:\\Users\\Tom\\Documents\\programming\\Python_projects\\database_viewer\\static')
+        'img_file': form.FileUploadField('Image file', allowed_extensions=['jpg', 'png', 'jpeg', 'svg', 'gif'], base_path='./src/static/')
     }
-
-    form_excluded_columns = ['img']
 
     def _change_img_data(self, _form):
         storage_file = _form.img_file.data
@@ -55,11 +53,39 @@ class ToponymImageModelView(SecuredModelView):
             while os.path.isfile(os.path.join(os.environ['IMG_STORAGE'], path)):
                 hash = random.getrandbits(32)
                 path = '%s.%s' % (hash, ext)
-            storage_file.save(os.path.join(os.environ['IMG_STORAGE'], path))
-            print(dir(_form))
-            _form.img.data = path
 
-            del _form.file
+            with open(os.path.join(os.environ['IMG_STORAGE'], path), 'wb') as gate:
+                storage_file.save(gate)
+
+            _form.img = path
+
+    def on_model_change(self, _form, model, is_created):
+        file_path = _form.img
+
+        if not is_created:
+            old_path = model.img
+            os.remove(os.path.join(os.environ['IMG_STORAGE'], old_path))
+
+        model.img = file_path
+
+        # if storage_file is not None:
+        #     hash = random.getrandbits(32)
+        #     ext = storage_file.filename.split('.')[-1]
+        #     path = '%s.%s' % (hash, ext)
+        #     while os.path.isfile(os.path.join(os.environ['IMG_STORAGE'], path)):
+        #         hash = random.getrandbits(32)
+        #         path = '%s.%s' % (hash, ext)
+
+        #     with open(os.path.join(os.environ['IMG_STORAGE'], path), 'wb') as gate:
+        #         storage_file.save(gate)
+
+        #     _form.img = path
+        #     self.img = path
+        #     model.img = path
+
+        #     del _form.img_file
+
+        return _form
 
         return _form
 

@@ -28,10 +28,9 @@ class AnthroponymImageModelView(SecuredModelView):
         if not model.img:
             return ''
         return markupsafe.Markup(
-            '<img src="%s" width="150">' %
+            '<img src="%s" style="min-width:150px; min-height:150px; max-width:300px; max-height:300px;">' %
             url_for('static', filename=model.img)
         )
-        # TODO: is url_for works with images?
         return "TODO"
 
     column_formatters = {
@@ -43,7 +42,7 @@ class AnthroponymImageModelView(SecuredModelView):
         },
     }
     form_extra_fields = {
-        'img_file': form.FileUploadField('Image file', allowed_extensions=['jpg', 'png', 'jpeg', 'svg', 'gif'], relative_path='./src/static/')
+        'img_file': form.FileUploadField('Image file', allowed_extensions=['jpg', 'png', 'jpeg', 'svg', 'gif'], base_path='./src/static/')
     }
 
 
@@ -63,34 +62,35 @@ class AnthroponymImageModelView(SecuredModelView):
             print(_form.data.items())
 
             _form.img = path
-            self.img = path
 
-            del _form.img_file
 
         return _form
 
     def on_model_change(self, _form, model, is_created):
-        print(dir(_form))
-        print(dir(model))
-        print(dir(is_created))
-        storage_file = model.img_file.data
+        file_path = _form.img
 
-        if storage_file is not None:
-            hash = random.getrandbits(32)
-            ext = storage_file.filename.split('.')[-1]
-            path = '%s.%s' % (hash, ext)
-            while os.path.isfile(os.path.join(os.environ['IMG_STORAGE'], path)):
-                hash = random.getrandbits(32)
-                path = '%s.%s' % (hash, ext)
+        if not is_created:
+            old_path = model.img
+            os.remove(os.path.join(os.environ['IMG_STORAGE'], old_path))
+
+        model.img = file_path
+        
+        # if storage_file is not None:
+        #     hash = random.getrandbits(32)
+        #     ext = storage_file.filename.split('.')[-1]
+        #     path = '%s.%s' % (hash, ext)
+        #     while os.path.isfile(os.path.join(os.environ['IMG_STORAGE'], path)):
+        #         hash = random.getrandbits(32)
+        #         path = '%s.%s' % (hash, ext)
             
-            with open(os.path.join(os.environ['IMG_STORAGE'], path), 'wb') as gate:
-                storage_file.save(gate)
+        #     with open(os.path.join(os.environ['IMG_STORAGE'], path), 'wb') as gate:
+        #         storage_file.save(gate)
 
-            _form.img = path
-            self.img = path
-            model.img = path
+        #     _form.img = path
+        #     self.img = path
+        #     model.img = path
 
-            del _form.img_file
+        #     del _form.img_file
 
         return _form
 
