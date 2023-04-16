@@ -45,7 +45,6 @@ class AnthroponymImageModelView(SecuredModelView):
         'img_file': form.FileUploadField('Image file', allowed_extensions=['jpg', 'png', 'jpeg', 'svg', 'gif'], base_path='./src/static/')
     }
 
-
     def _change_img_data(self, _form):
         storage_file = _form.img_file.data
 
@@ -56,13 +55,11 @@ class AnthroponymImageModelView(SecuredModelView):
             while os.path.isfile(os.path.join(os.environ['IMG_STORAGE'], path)):
                 hash = random.getrandbits(32)
                 path = '%s.%s' % (hash, ext)
-            
+
             with open(os.path.join(os.environ['IMG_STORAGE'], path), 'wb') as gate:
                 storage_file.save(gate)
-            print(_form.data.items())
 
             _form.img = path
-
 
         return _form
 
@@ -74,7 +71,7 @@ class AnthroponymImageModelView(SecuredModelView):
             os.remove(os.path.join(os.environ['IMG_STORAGE'], old_path))
 
         model.img = file_path
-        
+
         # if storage_file is not None:
         #     hash = random.getrandbits(32)
         #     ext = storage_file.filename.split('.')[-1]
@@ -82,7 +79,7 @@ class AnthroponymImageModelView(SecuredModelView):
         #     while os.path.isfile(os.path.join(os.environ['IMG_STORAGE'], path)):
         #         hash = random.getrandbits(32)
         #         path = '%s.%s' % (hash, ext)
-            
+
         #     with open(os.path.join(os.environ['IMG_STORAGE'], path), 'wb') as gate:
         #         storage_file.save(gate)
 

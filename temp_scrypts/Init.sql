@@ -11,19 +11,21 @@ CREATE TABLE anthroponym (
 
 CREATE TABLE toponym (
     toponym_id SERIAL PRIMARY KEY,
-    toponym VARCHAR(256) UNIQUE,
-    original VARCHAR(256) UNIQUE NOT NULL,
-    transcription VARCHAR(256) UNIQUE NOT NULL,
-    source VARCHAR(512) UNIQUE NOT NULL,
+    toponym VARCHAR(512),
+    original VARCHAR(512) NOT NULL,
+    transcription VARCHAR(512) NOT NULL,
+    historical_source VARCHAR(512),
+    ageographical_source VARCHAR(512),
     comments VARCHAR(2048),
-    century NUMERIC(4) NOT NULL
+    century NUMERIC(4)
+    geopos VARCHAR(32)
 );
 
 CREATE TABLE anthroponym_image(
     anthroponym_id BIGINT UNSIGNED NOT NULL,
     img BLOB NOT NULL,
     CONSTRAINT fk_anthroponym_img
-        FOREIGN KEY (anthroponym_id) 
+        FOREIGN KEY (anthroponym_id)
 	    REFERENCES anthroponym(anthroponym_id)
 	    ON DELETE CASCADE
 );
@@ -33,7 +35,7 @@ CREATE TABLE toponym_image(
     toponym_id BIGINT UNSIGNED NOT NULL,
     img BLOB NOT NULL,
     CONSTRAINT fk_toponym_img
-        FOREIGN KEY(toponym_id) 
+        FOREIGN KEY(toponym_id)
 	    REFERENCES toponym(toponym_id)
 	    ON DELETE CASCADE
 );
@@ -50,11 +52,11 @@ CREATE TABLE anthroponym_reference (
     literature_id BIGINT UNSIGNED NOT NULL,
     pages VARCHAR(100) NOT NULL,
     CONSTRAINT fk_anthroponym_ref
-        FOREIGN KEY(anthroponym_id) 
+        FOREIGN KEY(anthroponym_id)
 	    REFERENCES anthroponym(anthroponym_id)
 	    ON DELETE CASCADE,
     CONSTRAINT fk_literature_ref_anth
-        FOREIGN KEY(literature_id) 
+        FOREIGN KEY(literature_id)
 	    REFERENCES literature(literature_id)
 	    ON DELETE CASCADE
 );
@@ -64,11 +66,11 @@ CREATE TABLE toponym_reference (
     literature_id BIGINT UNSIGNED NOT NULL,
     pages VARCHAR(100) NOT NULL,
     CONSTRAINT fk_toponym_ref
-        FOREIGN KEY(toponym_id) 
+        FOREIGN KEY(toponym_id)
 	    REFERENCES toponym(toponym_id)
 	    ON DELETE CASCADE,
     CONSTRAINT fk_literature_ref_top
-        FOREIGN KEY(literature_id) 
+        FOREIGN KEY(literature_id)
 	    REFERENCES literature(literature_id)
 	    ON DELETE CASCADE
 );
